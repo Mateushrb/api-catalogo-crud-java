@@ -1,9 +1,12 @@
 package br.edu.senai.sc.catalogo.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Entity
@@ -19,7 +22,19 @@ public class Produto {
 	private Long quantidade;
 	
 	@ManyToOne
+	@JoinColumn(name = "categoria_id")
 	private Categoria categoria;
+	
+	public Produto() {}
+
+	public Produto(Long id, String nome, String descricao, Double preco, Long quantidade, Categoria categoria) {
+		this.id = id;
+		this.nome = nome;
+		this.descricao = descricao;
+		this.preco = preco;
+		this.quantidade = quantidade;
+		this.categoria = categoria;
+	}
 
 	public Long getId() {
 		return id;
