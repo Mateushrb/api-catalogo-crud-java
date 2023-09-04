@@ -1,6 +1,6 @@
 ## Desenvolvimento de uma API em Java utilizando Spring Framework.
 
-# API - Catálogo de Produtos <sup>1.0</sup>
+# API - Catálogo de Produtos <sup>```1.0```</sup>
 
 **Versão:** ```1.0```
 
