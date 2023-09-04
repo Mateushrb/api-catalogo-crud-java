@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.senai.sc.catalogo.Service.ProdutoService;
 import br.edu.senai.sc.catalogo.entities.Produto;
+import io.swagger.annotations.ApiOperation;
 
 
 @RestController
@@ -31,6 +32,7 @@ public class ProdutoController {
 		this.produtoService = produtoService;
 	}
 	
+	@ApiOperation(value = "Cadastrar produto")
 	@PostMapping
 	public ResponseEntity<String> cadastrarProduto(@RequestBody Produto produto) {
 		try {
@@ -41,6 +43,7 @@ public class ProdutoController {
 		return new ResponseEntity<>("Produto cadastrado com sucesso!", HttpStatus.CREATED);
 	}
 	
+	@ApiOperation(value = "Buscar todos os produtos")
 	@GetMapping
 	public ResponseEntity<List<Produto>> buscarProdutos() {
 		try {
@@ -51,6 +54,7 @@ public class ProdutoController {
 		}
 	}
 	
+	@ApiOperation(value = "Buscar produto por código")
 	@GetMapping("/{codigo}")
 	public ResponseEntity<Produto> buscarProduto(@PathVariable("codigo") Long codigo) {
 		try {
@@ -64,6 +68,7 @@ public class ProdutoController {
 		return new ResponseEntity<>(new Produto(), HttpStatus.NO_CONTENT);
 	}
 	
+	@ApiOperation(value = "Buscar produto por nome")
 	@GetMapping("/nome")
 	public ResponseEntity<List<Produto>> buscarProduto(@RequestParam("nome") String nome) {
 		try {
@@ -74,6 +79,7 @@ public class ProdutoController {
 		}
 	}
 	
+	@ApiOperation(value = "Apagar produto")
 	@DeleteMapping("/{codigo}")
 	public ResponseEntity<String> excluirProduto(@PathVariable("codigo") Long codigo) {
 		try {
@@ -84,6 +90,7 @@ public class ProdutoController {
 		return new ResponseEntity<>("Produto excluido com sucesso", HttpStatus.OK);
 	}
 	
+	@ApiOperation(value = "Alterar produto")
 	@PutMapping
 	public ResponseEntity<String> alterarProduto(@RequestBody Produto produto) {
 		try {
@@ -94,6 +101,7 @@ public class ProdutoController {
 		return new ResponseEntity<>("Produto alterado com sucesso!", HttpStatus.OK);
 	}
 	
+	@ApiOperation(value = "Alterar o nome do produto")
 	@PatchMapping("/{codigo}")
 	public ResponseEntity<String> alterarNome(@RequestParam("nome") String nome, @PathVariable("codigo") Long codigo) {
 		try {
@@ -104,6 +112,7 @@ public class ProdutoController {
 		return new ResponseEntity<>("Produto alterado com sucesso!", HttpStatus.OK);
 	}
 	
+	@ApiOperation(value = "Adicionar categoria")
 	@PatchMapping("/addCategoria")
 	public ResponseEntity<String> addCategoria(@RequestParam("produto") Long codigoProduto, @RequestParam("categoria") Long codigoCategoria) {
 		try {
@@ -114,6 +123,7 @@ public class ProdutoController {
 		return new ResponseEntity<>("Categoria adicionada com sucesso!", HttpStatus.OK);
 	}
 	
+	@ApiOperation(value = "Remover categoria")
 	@PatchMapping("/removeCategoria/{codigo}")
 	public ResponseEntity<String> removeCategoria(@PathVariable("codigo") Long codigo) {
 		try {

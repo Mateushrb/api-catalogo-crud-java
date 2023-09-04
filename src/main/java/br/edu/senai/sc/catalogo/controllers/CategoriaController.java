@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.senai.sc.catalogo.Service.CategoriaService;
 import br.edu.senai.sc.catalogo.entities.Categoria;
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/api/categoria")
@@ -30,6 +31,7 @@ public class CategoriaController {
 		this.categoriaService = categoriaService;
 	}
 	
+	@ApiOperation(value = "Cadastrar categoria")
 	@PostMapping
 	public ResponseEntity<String> cadastrarCategoria(@RequestBody Categoria categoria) {
 		try {
@@ -40,6 +42,7 @@ public class CategoriaController {
 		return new ResponseEntity<>("Categoria cadastrada com sucesso!", HttpStatus.CREATED);
 	}
 	
+	@ApiOperation(value = "Buscar todas as categoria")
 	@GetMapping
 	public ResponseEntity<List<Categoria>> buscarCategorias() {
 		try {
@@ -50,6 +53,7 @@ public class CategoriaController {
 		}
 	}
 	
+	@ApiOperation(value = "Buscar categoria por código")
 	@GetMapping("/{codigo}")
 	public ResponseEntity<Categoria> buscarCategoria(@PathVariable("codigo") Long codigo) {
 		try {
@@ -63,6 +67,7 @@ public class CategoriaController {
 		return new ResponseEntity<>(new Categoria(), HttpStatus.NO_CONTENT);
 	}
 	
+	@ApiOperation(value = "Buscar categoria por nome")
 	@GetMapping("/nome")
 	public ResponseEntity<List<Categoria>> buscarCategoria(@RequestParam("nome") String nome) {
 		try {
@@ -73,6 +78,7 @@ public class CategoriaController {
 		}
 	}
 	
+	@ApiOperation(value = "Apagar categoria")
 	@DeleteMapping("/{codigo}")
 	public ResponseEntity<String> excluirCategoria(@PathVariable("codigo") Long codigo) {
 		try {
@@ -83,8 +89,9 @@ public class CategoriaController {
 		return new ResponseEntity<>("Categoria excluida com sucesso", HttpStatus.OK);
 	}
 	
+	@ApiOperation(value = "Alterar categoria")
 	@PutMapping
-	public ResponseEntity<String> alterarCarro(@RequestBody Categoria categoria) {
+	public ResponseEntity<String> alterarCategoria(@RequestBody Categoria categoria) {
 		try {
 			categoriaService.salvarCategoria(categoria);
 		}catch (Exception exception) {
@@ -93,6 +100,7 @@ public class CategoriaController {
 		return new ResponseEntity<>("Categoria alterada com sucesso!", HttpStatus.OK);
 	}
 	
+	@ApiOperation(value = "Alterar o nome da categoria")
 	@PatchMapping("/{codigo}")
 	public ResponseEntity<String> alterarNome(@RequestParam("nome") String nome, @PathVariable("codigo") Long codigo) {
 		try {
