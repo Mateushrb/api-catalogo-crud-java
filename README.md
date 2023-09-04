@@ -2,7 +2,7 @@
 
 # API - Catálogo de Produtos <sup>1.0</sup>
 
-**Versão:** 1.0
+**Versão:** ```1.0```
 
 Esta é uma API para o cadastro de produtos.
 
@@ -27,5 +27,5 @@ Os seguintes métodos estão disponíveis na API:
   - Descrição
   - Preço
   - Quantidade
-  
+
 - Também é possível cadastrar uma categoria, fornecendo apenas o nome e, em seguida, adicioná-la a um produto.
