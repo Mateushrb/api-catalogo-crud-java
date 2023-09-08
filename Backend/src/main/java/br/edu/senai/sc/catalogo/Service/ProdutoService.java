@@ -6,8 +6,10 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import br.edu.senai.sc.catalogo.Repository.CategoriaRepository;
+import br.edu.senai.sc.catalogo.Repository.ImagemRepository;
 import br.edu.senai.sc.catalogo.Repository.ProdutoRepository;
 import br.edu.senai.sc.catalogo.entities.Categoria;
+import br.edu.senai.sc.catalogo.entities.Imagem;
 import br.edu.senai.sc.catalogo.entities.Produto;
 
 @Service
@@ -15,10 +17,12 @@ public class ProdutoService {
 
 	private final ProdutoRepository produtoRepository;
 	private final CategoriaRepository categoriaRepository;
+	private final ImagemRepository imagemRepository;
 	
-	public ProdutoService(ProdutoRepository produtoRepository, CategoriaRepository categoriaRepository) {
+	public ProdutoService(ProdutoRepository produtoRepository, CategoriaRepository categoriaRepository, ImagemRepository imagemRepository) {
 		this.produtoRepository = produtoRepository;
 		this.categoriaRepository = categoriaRepository;
+		this.imagemRepository = imagemRepository;
 	}
 
 	public Produto salvarProduto(Produto produto) {
@@ -39,6 +43,12 @@ public class ProdutoService {
 	}
 	
 	public void excluirProduto(Long codigo) {
+		if(buscarProdutoPorCodigo(codigo).get().getCategoria() != null) {
+			removeCategoria(codigo);
+		}
+		if(buscarProdutoPorCodigo(codigo).get().getIdImagem() != "Sem imagem") {
+			removeImagem(codigo);
+		}
 		produtoRepository.deleteById(codigo);
 	}
 	
@@ -71,6 +81,30 @@ public class ProdutoService {
 			categoria.removeProduto(produto.get());
 			produtoRepository.save(produto.get());
 			categoriaRepository.save(categoria);
+		}
+		return produto.get();
+	}
+	
+	public Produto addImagem(Long codigoProduto, String codigoImagem) {
+		Optional<Produto> produto = produtoRepository.findById(codigoProduto);
+		Imagem imagem = imagemRepository.findById(codigoImagem).get();
+		
+		if(Optional.ofNullable(produto).isPresent() && Optional.ofNullable(imagem).isPresent()) {
+			produto.get().setImagem(imagem);
+			imagem.setProduto(produto.get());
+			produtoRepository.save(produto.get());
+			imagemRepository.save(imagem);
+		}
+		return produto.get();
+	}
+	
+	public Produto removeImagem(Long codigoProduto) {
+		Optional<Produto> produto = produtoRepository.findById(codigoProduto);
+		String codigoImagem = produto.get().getIdImagem();
+		if(Optional.ofNullable(produto).isPresent()) {
+			produto.get().setImagem(null);
+			produtoRepository.save(produto.get());
+			imagemRepository.deleteById(codigoImagem);
 		}
 		return produto.get();
 	}

@@ -85,7 +85,7 @@ public class ProdutoController {
 		try {
 			produtoService.excluirProduto(codigo);
 		}catch (Exception exception) {
-			return new ResponseEntity<>("Erro ao excluir o Produto", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>("Erro ao excluir o Produto" + exception, HttpStatus.BAD_REQUEST);
 		}
 		return new ResponseEntity<>("Produto excluido com sucesso", HttpStatus.OK);
 	}
@@ -132,6 +132,28 @@ public class ProdutoController {
 			return new ResponseEntity<>("Erro ao remover a Categoria!", HttpStatus.BAD_REQUEST);
 		}
 		return new ResponseEntity<>("Categoria removida com sucesso!", HttpStatus.OK);
+	}
+	
+	@ApiOperation(value = "Adicionar imagem")
+	@PatchMapping(value = "/addImagem")
+	public ResponseEntity<String> addImagem(@RequestParam("produto") Long codigoProduto, @RequestParam("imagem") String codigoImagem) {
+		try {
+			produtoService.addImagem(codigoProduto, codigoImagem);
+		}catch (Exception exception) {
+			return new ResponseEntity<>("Erro ao adicionar a Imagem!", HttpStatus.BAD_REQUEST);
+		}
+		return new ResponseEntity<>("Imagem adicionada com sucesso!", HttpStatus.OK);
+	}
+	
+	@ApiOperation(value = "Remover imagem")
+	@DeleteMapping("/{codigo}/removeImagem")
+	public ResponseEntity<String> removeImagem(@PathVariable("codigo") Long codigoProduto) {
+		try {
+			produtoService.removeImagem(codigoProduto);
+		}catch (Exception exception) {
+			return new ResponseEntity<>("Erro ao remover a Imagem!", HttpStatus.BAD_REQUEST);
+		}
+		return new ResponseEntity<>("Imagem removida com sucesso!", HttpStatus.OK);
 	}
 	
 }

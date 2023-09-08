@@ -6,6 +6,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Produto {
@@ -22,6 +25,22 @@ public class Produto {
 	@ManyToOne
 	@JoinColumn(name = "categoria_id")
 	private Categoria categoria;
+	
+	@JsonIgnore
+	@OneToOne
+	@JoinColumn(name = "imagem_id")
+	private Imagem imagem;
+	
+	private String idImagem = "";
+	
+	public String getIdImagem() {
+		if (this.imagem == null) {
+			return "Sem imagem";
+		} else {
+			this.idImagem = imagem.getId();
+			return idImagem;			
+		}
+	}
 	
 	public Produto() {}
 
@@ -82,5 +101,14 @@ public class Produto {
 		this.categoria = categoria;
 	}
 	
+	public Imagem getImagem() {
+		return imagem;
+	}
+	public void setImagem(Imagem imagem) {
+		this.imagem = imagem;
+	}
+	public void removeImagem() {
+		this.imagem = null;
+	}
 	
 }
