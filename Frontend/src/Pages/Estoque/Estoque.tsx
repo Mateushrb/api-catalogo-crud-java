@@ -1,51 +1,50 @@
-import { useEffect, useState } from 'react';
-import { useCustomApi } from '../../Hooks/useCustomApi';
-import { TypesProduto } from '../../types/types'
-import { DataTable } from 'primereact/datatable';
-import { Column } from 'primereact/column';
+import { useApi } from '../../Hooks/useAPI';
 
-import 'primeicons/primeicons.css';
-import '../../Style.css'
+type TypeProduto = {
+  id: 0,
+  nome: string,
+  idImagem: string,
+  descricao: string,
+  preco: 0,
+  quantidade: 0
+  categoria: {
+    id: 0,
+    nome: string
+  },
+}
 
-const Estoque = () => {
-  const [data, setData] = useState<TypesProduto[]>([]);
-  const { loading, error, getProduto } = useCustomApi<{ produtos: TypesProduto[] }>('api/produto');
-
-  useEffect(() => {
-    getProduto()
-      .then((responseData) => {
-        setData(responseData.produtos);
-      })
-      .catch((error) => console.log(error))
-  }, [getProduto])
+function Estoque() {
+  const { data: produtos, loading, error } = useApi<TypeProduto>('produtos');
 
   if (loading) {
-    return <div>Carregando..................</div>;
+    return <div>Carregando produtos...</div>;
   }
 
   if (error) {
-    return <div>Erro: {error}</div>;
+    return <div>Erro ao carregar produtos: {error}</div>;
   }
 
   return (
     <div>
-      {data && data.map((produto: TypesProduto) => (
-        <div key={produto.id}>
-          <div>
-            <h2>Detalhes do Produto</h2>
-            <p>Nome: {produto.nome}</p>
-            <p>Descrição: {produto.descricao}</p>
-            <p>Preço: R$ {produto.preco.toFixed(2)}</p>
-            <p>Quantidade: {produto.quantidade}</p>
-            <p>Categoria: {produto.categoria.nome}</p>
-            {/* Você pode adicionar mais campos conforme necessário */}
-          </div>
-          {/* Renderize os dados do produto aqui */}
+      {loading ? (
+        <div>Carregando...</div>
+      ) : (
+        <div>
+          {produtos?.map((produto) => (
+            <div key={produto.id}>
+              <h2>Detalhes do Produto</h2>
+              <p>Nome: {produto.nome}</p>
+              <p>Descrição: {produto.descricao}</p>
+              <p>Preço: R$ {produto.preco.toFixed(2)}</p>
+              <p>Quantidade: {produto.quantidade}</p>
+              <p>Categoria: {produto.categoria.id}</p>
+              <img alt='Imagem produto' src={`http://45.235.53.125:8080/api/imagem/${produto.idImagem}`}></img>
+            </div>
+          ))}
         </div>
-
-      ))}
+      )}
     </div>
   );
-};
+}
 
 export default Estoque;
