@@ -1,6 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { TypesCategoria } from '../types/types';
-
 class API {
   static URL = "http://45.235.53.125:8080";
 

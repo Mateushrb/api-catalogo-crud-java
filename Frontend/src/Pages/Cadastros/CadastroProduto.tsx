@@ -1,11 +1,123 @@
-import React from 'react'
-
-const CadastroProduto = () => {
-  return (
-    <div>
-      aaa
-    </div>
-  )
+import React, { useState } from 'react';
+import API from '../../Hooks/useAPI';
+interface TypesProduto {
+  nome: string,
+  idImagem: string,
+  descricao: string,
+  preco: number,
+  quantidade: number,
+  categoria: {
+    nome: string,
+  },
 }
 
-export default CadastroProduto
+const CadastroProduto: React.FC = () => {
+  const [newProduto, setNewProduto] = useState<TypesProduto>({
+    nome: '',
+    idImagem: '',
+    descricao: '',
+    preco: 0,
+    quantidade: 0,
+    categoria: {
+      nome: '',
+    },
+
+  });
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setNewProduto({ ...newProduto, [name]: value });
+  };
+
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+
+    API.postProduto(newProduto)
+      .then((data) => {
+        console.log('Produto cadastrado com sucesso:', data);
+        setNewProduto({
+          nome: '',
+          idImagem: '',
+          descricao: '',
+          preco: 0,
+          quantidade: 0,
+          categoria: {
+            nome: '',
+          },
+        });
+      })
+      .catch((error) => {
+        console.error('Erro ao cadastrar o Produto:', error);
+      });
+  };
+
+  return (
+    <div className='box'>
+      <h2>Cadastro de Produto</h2>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>Nome do Produto:</label>
+          <input
+            type="text"
+            name="nome"
+            value={newProduto.nome}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div>
+          <label>ID da Imagem:</label>
+          <input
+            type="text"
+            name="idImagem"
+            value={newProduto.idImagem}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div>
+          <label>Descrição do Produto:</label>
+          <input
+            type="text"
+            name="descricao"
+            value={newProduto.descricao}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div>
+          <label>Preço do Produto:</label>
+          <input
+            type="number"
+            name="preco"
+            value={newProduto.preco}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div>
+          <label>Quantidade do Produto:</label>
+          <input
+            type="number"
+            name="quantidade"
+            value={newProduto.quantidade}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div>
+          <label>Categoria do Produto:</label>
+          <input
+            type="text"
+            name="categoria"
+            value={newProduto.categoria.nome}
+            onChange={(e) => {
+              setNewProduto({
+                ...newProduto,
+                categoria: { nome: e.target.value },
+              });
+            }}
+          />
+        </div>
+        <button type="submit">Cadastrar</button>
+      </form>
+    </div>
+  );
+};
+
+export default CadastroProduto;

@@ -31,7 +31,7 @@ const CadastroCategoria: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className='box'>
       <h2>Cadastro de Categoria</h2>
       <form onSubmit={handleSubmit}>
         <div>
