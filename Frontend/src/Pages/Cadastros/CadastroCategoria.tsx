@@ -1,53 +1,52 @@
-import React, { useState } from 'react'
-import ButtonAddCategoria from '../../Components/ButtonAddCategoria';
-import '../../Style.css'
+import React, { useState } from 'react';
+import API from '../../Hooks/useAPI';
 
-interface Categoria {
-  nome: string;
+interface TypesCategoria {
+  nome: string
 }
 
-const CadastroCategoria = () => {
-  const [categoria, setCategoria] = useState<Categoria>({
+const CadastroCategoria: React.FC = () => {
+  const [newCategoria, setNewCategoria] = useState<TypesCategoria>({
     nome: '',
   });
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const { name, value } = e.target;
-    setCategoria({ ...categoria, [name]: value });
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setNewCategoria({ ...newCategoria, [name]: value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log('Categoria cadastrada:', categoria);
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
 
-    setCategoria({
-      nome: '',
-    });
+    API.postCategoria(newCategoria)
+      .then((data) => {
+        console.log('Categoria cadastrada com sucesso:', data);
+        setNewCategoria({
+          nome: '',
+        });
+      })
+      .catch((error) => {
+        console.error('Erro ao cadastrar a categoria:', error);
+      });
   };
+
   return (
     <div>
-      <h2 className='mb'>Cadastro de Categoria</h2>
-      <form className='mb flex' onSubmit={handleSubmit}>
+      <h2>Cadastro de Categoria</h2>
+      <form onSubmit={handleSubmit}>
         <div>
-          <div>
-            <label>Categoria:</label>
-          </div>
-          <input className='styleInputAdd mb'
+          <label>Nova Categoria:</label>
+          <input
             type="text"
             name="nome"
-            value={categoria.nome}
-            onChange={handleChange}
-            required
+            value={newCategoria.nome}
+            onChange={handleInputChange}
           />
         </div>
-        <div>
-          <ButtonAddCategoria />
-        </div>
+        <button type="submit">Cadastrar</button>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default CadastroCategoria
+export default CadastroCategoria;

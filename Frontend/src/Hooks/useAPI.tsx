@@ -1,34 +1,37 @@
-import { useEffect, useState } from 'react';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { TypesCategoria } from '../types/types';
 
-type ApiResponse<T> = {
-  data: T | null;
-  loading: boolean;
-  error: string | null;
-};
+class API {
+  static URL = "http://45.235.53.125:8080";
 
-export function useApi<T>(endpoint: string): ApiResponse<T[]> {
-  const [data, setData] = useState<T[] | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  static async fetchData(endpoint: string, method: string, data = null) {
+    const url = `${this.URL}${endpoint}`;
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(`http://45.235.53.125:8080/api/produto`);
-        if (!response.ok) {
-          throw new Error('Erro na resposta da API');
-        }
-        const result = await response.json();
-        setData(result);
-        setLoading(false);
-      } catch (err) {
-        setError(err.message);
-        setLoading(false);
+    try {
+      const options = {
+        method,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: data ? JSON.stringify(data) : null,
+      };
+
+      const response = await fetch(url, options);
+
+      if (!response.ok) {
+        throw new Error(`Erro na solicitação ${method} para ${url}`);
       }
-    };
+      return response.json();
+    } catch (error: any) {
+      throw new Error(`Erro ao fazer a solicitação ${method} para ${url}: ${error.message}`);
+    }
+  }
 
-    fetchData();
-  }, [endpoint]);
+  static getProduto = () => this.fetchData('/api/produto', 'GET');
+  static getCategoria = () => this.fetchData('/api/categoria', 'GET');
 
-  return { data, loading, error };
+  static postProduto = (data: any) => this.fetchData('/api/produto', 'POST', data);
+  static postCategoria = (data: any) => this.fetchData('/api/categoria', 'POST', data)
 }
+
+export default API;
