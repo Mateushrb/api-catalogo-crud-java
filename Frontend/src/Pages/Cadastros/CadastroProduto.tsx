@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import API from '../../Hooks/useAPI';
+import CategoryFilter from '../../Components/CategoryFilter';
 interface TypesProduto {
   nome: string,
   idImagem: string,
@@ -32,6 +33,13 @@ const CadastroProduto: React.FC = () => {
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
 
+    const handleCategoryChange = (categoryId: number) => {
+      setNewProduto({
+        ...newProduto,
+        categoria: { nome: categoryId.toString() },
+      });
+    };
+
     API.postProduto(newProduto)
       .then((data) => {
         console.log('Produto cadastrado com sucesso:', data);
@@ -50,6 +58,10 @@ const CadastroProduto: React.FC = () => {
         console.error('Erro ao cadastrar o Produto:', error);
       });
   };
+
+  function handleCategoryChange(categoryId: number): void {
+    throw new Error('Function not implemented.');
+  }
 
   return (
     <div className='box'>
@@ -100,20 +112,7 @@ const CadastroProduto: React.FC = () => {
             onChange={handleInputChange}
           />
         </div>
-        <div>
-          <label>Categoria do Produto:</label>
-          <input
-            type="text"
-            name="categoria"
-            value={newProduto.categoria.nome}
-            onChange={(e) => {
-              setNewProduto({
-                ...newProduto,
-                categoria: { nome: e.target.value },
-              });
-            }}
-          />
-        </div>
+        <CategoryFilter onSelectCategory={(categoryId) => handleCategoryChange(categoryId)} />
         <button type="submit">Cadastrar</button>
       </form>
     </div>
