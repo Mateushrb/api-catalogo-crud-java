@@ -1,11 +1,11 @@
-import React from 'react'
+import CatalogoCard from '../../Components/CatalogoCard'
 
 const PaginaInicial = () => {
   return (
     <div>
-      inicio
+      <CatalogoCard id={0} nome={''} idImagem={''} descricao={''} preco={0} quantidade={0} />
     </div>
   )
 }
 
-export default PaginaInicial
+export default PaginaInicial;
