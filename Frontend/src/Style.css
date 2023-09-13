@@ -67,6 +67,11 @@ ul {
   margin-bottom: var(--gap-normal);
 }
 
+.flexColumn {
+  flex-direction: column;
+  display: flex;
+}
+
 .bg-1 {
   background: var(--color-1);
 }
@@ -264,4 +269,50 @@ ul {
 
 .product-danger-status {
   opacity: 0.5;
+}
+
+.cadastroInput {
+  padding: 10px 15px;
+  font-size: 12px;
+  border-width: 0px;
+  border-color: #CCCCCC;
+  background-color: #FFFFFF;
+  color: #000000;
+  border-style: solid;
+  border-radius: 20px;
+  margin-top: 5px;
+}
+
+.categorFilter {
+  padding: 10px 15px;
+  font-size: 12px;
+  border-width: 0px;
+  border-color: #CCCCCC;
+  background-color: #FFFFFF;
+  color: #000000;
+  border-radius: 20px;
+  margin-top: 5px;
+  width: 100%;
+}
+
+.cadastroButton {
+  padding: 10px 15px;
+  border-radius: 20px;
+  border: solid #e8a72f 1px;
+  background-color: #e8a72f;
+  width: 100%;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.cadastroButton:hover {
+  border: #00896F;
+  background-color: #00896F;
+  color: #FFFFFF;
+}
+
+.cadastroLabel {
+  font-size: 14px;
+  font-weight: 600;
 }

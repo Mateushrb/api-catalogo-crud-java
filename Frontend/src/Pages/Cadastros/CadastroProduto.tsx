@@ -65,47 +65,42 @@ const CadastroProduto: React.FC = () => {
 
   return (
     <div className='box'>
-      <h2>Cadastro de Produto</h2>
+      <h2 className='mb'>Cadastro de Produto</h2>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>Nome do Produto:</label>
+        <div className='mb flexColumn'>
+          <label className='cadastroLabel'>Nome do Produto:</label>
           <input
+            className='cadastroInput'
             type="text"
             name="nome"
             value={newProduto.nome}
             onChange={handleInputChange}
           />
         </div>
-        <div>
-          <label>ID da Imagem:</label>
+        <div className='mb flexColumn'>
+          <label className='cadastroLabel'>Descrição:</label>
           <input
-            type="text"
-            name="idImagem"
-            value={newProduto.idImagem}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div>
-          <label>Descrição do Produto:</label>
-          <input
+            className='cadastroInput'
             type="text"
             name="descricao"
             value={newProduto.descricao}
             onChange={handleInputChange}
           />
         </div>
-        <div>
-          <label>Preço do Produto:</label>
+        <div className='mb flexColumn'>
+          <label className='cadastroLabel'>Preço:</label>
           <input
+            className='cadastroInput'
             type="number"
             name="preco"
             value={newProduto.preco}
             onChange={handleInputChange}
           />
         </div>
-        <div>
-          <label>Quantidade do Produto:</label>
+        <div className='mb flexColumn'>
+          <label className='cadastroLabel'>Quantidade:</label>
           <input
+            className='cadastroInput'
             type="number"
             name="quantidade"
             value={newProduto.quantidade}
@@ -113,7 +108,7 @@ const CadastroProduto: React.FC = () => {
           />
         </div>
         <CategoryFilter onSelectCategory={(categoryId) => handleCategoryChange(categoryId)} />
-        <button type="submit">Cadastrar</button>
+        <button className='cadastroButton' type="submit">Cadastrar</button>
       </form>
     </div>
   );

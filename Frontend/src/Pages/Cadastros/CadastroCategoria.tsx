@@ -32,18 +32,19 @@ const CadastroCategoria: React.FC = () => {
 
   return (
     <div className='box'>
-      <h2>Cadastro de Categoria</h2>
+      <h2 className='mb'>Cadastro de Categoria</h2>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>Nova Categoria:</label>
+        <div className='mb flexColumn'>
+          <label className='cadastroLabel'>Nova Categoria:</label>
           <input
+            className='cadastroInput'
             type="text"
             name="nome"
             value={newCategoria.nome}
             onChange={handleInputChange}
           />
         </div>
-        <button type="submit">Cadastrar</button>
+        <button className='cadastroButton' type="submit">Cadastrar</button>
       </form>
     </div>
   );

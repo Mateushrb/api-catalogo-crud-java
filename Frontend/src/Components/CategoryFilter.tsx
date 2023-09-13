@@ -32,8 +32,9 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({ onSelectCategory }) => 
 
   return (
     <div>
-      <label htmlFor="categorySelect">Selecione a Categoria:</label>
+      <label className='cadastroLabel' htmlFor="categorySelect">Selecione a Categoria: </label>
       <select
+        className='mb categorFilter'
         id="categorySelect"
         name="category"
         value={selectedCategory || ''}
