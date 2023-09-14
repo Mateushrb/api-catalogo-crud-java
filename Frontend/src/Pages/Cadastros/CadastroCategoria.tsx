@@ -1,53 +1,42 @@
 import React, { useState } from 'react';
-import API from '../../Hooks/useAPI';
 
-interface TypesCategoria {
-  nome: string
+interface CategoryData {
+  categoria: string;
 }
 
-const CadastroCategoria: React.FC = () => {
-  const [newCategoria, setNewCategoria] = useState<TypesCategoria>({
-    nome: '',
+interface Props {
+  onNext: (data: CategoryData) => void;
+}
+
+const CategoryStep: React.FC<Props> = ({ onNext }) => {
+  const [formData, setFormData] = useState<CategoryData>({
+    categoria: '',
   });
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    setNewCategoria({ ...newCategoria, [name]: value });
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
-  const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-
-    API.postCategoria(newCategoria)
-      .then((data) => {
-        console.log('Categoria cadastrada com sucesso:', data);
-        setNewCategoria({
-          nome: '',
-        });
-      })
-      .catch((error) => {
-        console.error('Erro ao cadastrar a categoria:', error);
-      });
+  const handleNext = () => {
+    onNext(formData);
   };
 
   return (
-    <div className='box'>
-      <h2 className='mb'>Cadastro de Categoria</h2>
-      <form onSubmit={handleSubmit}>
-        <div className='mb flexColumn'>
-          <label className='cadastroLabel'>Nova Categoria:</label>
-          <input
-            className='cadastroInput'
-            type="text"
-            name="nome"
-            value={newCategoria.nome}
-            onChange={handleInputChange}
-          />
+    <div>
+      <h2>Cadastro de Categoria</h2>
+      <form>
+        <div>
+          <label>Categoria:</label>
+          <input type="text" name="categoria" value={formData.categoria} onChange={handleInputChange} />
         </div>
-        <button className='cadastroButton' type="submit">Cadastrar</button>
       </form>
+      <button onClick={handleNext}>Próxima Etapa</button>
     </div>
   );
 };
 
-export default CadastroCategoria;
+export default CategoryStep;
