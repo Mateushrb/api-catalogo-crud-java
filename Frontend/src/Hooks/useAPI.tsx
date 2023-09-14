@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 class API {
   static URL = "http://45.235.53.125:8080";
 
@@ -28,8 +27,8 @@ class API {
   static getProduto = () => this.fetchData('/api/produto', 'GET');
   static getCategoria = () => this.fetchData('/api/categoria', 'GET');
 
-  static postProduto = (data: any) => this.fetchData('/api/produto', 'POST', data);
-  static postCategoria = (data: any) => this.fetchData('/api/categoria', 'POST', data)
+  static postProduto = (data) => this.fetchData('/api/produto', 'POST', data);
+  static postCategoria = (data) => this.fetchData('/api/categoria', 'POST', data)
 }
 
 export default API;
