@@ -1,19 +1,19 @@
 // Interface para representar um produto
 export interface TypesProduto {
-  id: 0,
+  id: number,
   nome: string,
   idImagem: string,
   descricao: string,
-  preco: 0,
-  quantidade: 0
+  preco: number,
+  quantidade: number
   categoria: {
-    id: 0,
+    id: number,
     nome: string
   },
 }
 
 // Interface para representar uma categoria
 export interface TypesCategoria {
-  id: 0,
+  id: number,
   nome: string
 }

@@ -356,12 +356,12 @@ ul {
 }
 
 .Estoque-baixo {
-  background-color: #ffc107;
+  background-color: #5E88C7;
   padding: 5px 15px;
   border-radius: 20px;
   font-size: 12px;
   font-weight: 600;
-  color: #000;
+  color: #fff;
 }
 
 .Fora-de-estoque {

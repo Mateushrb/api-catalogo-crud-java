@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import API from '../../Hooks/useAPI';
 
 interface ProductData {
   nome: string;
@@ -28,7 +29,14 @@ const CadastroProduto: React.FC<Props> = ({ onNext }) => {
   };
 
   const handleNext = () => {
-    onNext(formData);
+    
+      API.postProduto(formData)
+        .then((data) => {
+          setFormData(data);
+          onNext(data);
+        })
+      onNext(formData);
+      
   };
 
   return (

@@ -29,6 +29,8 @@ class API {
 
   static postProduto = (data) => this.fetchData('/api/produto', 'POST', data);
   static postCategoria = (data) => this.fetchData('/api/categoria', 'POST', data)
+
+  static patchAddCategoria = (idCategoria, idProduto) => this.fetchData(`/api/produto/addCategoria/?categoria=${idCategoria}&produto=${idProduto}`, 'PATCH')
 }
 
 export default API;

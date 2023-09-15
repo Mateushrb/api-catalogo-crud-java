@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import API from '../../Hooks/useAPI';
+import SelectCategoria from '../../Components/SelectCategoria';
 
 interface CategoryData {
   categoria: string;
@@ -13,15 +15,24 @@ const CategoryStep: React.FC<Props> = ({ onNext }) => {
     categoria: '',
   });
 
+  const [idCategoria, setIdCategoria] = useState<number>(0);
+
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
+
   };
 
   const handleNext = () => {
+    // Patch no endpoint /api/produto/addCategoria
+    // Passar id do produto e da categoria por parâmetro
+    // conforme documentação key = categoria key = produto
+
+    API.patchAddCategoria(idCategoria, idProduto)
+    
     onNext(formData);
   };
 
@@ -31,7 +42,7 @@ const CategoryStep: React.FC<Props> = ({ onNext }) => {
       <form>
         <div>
           <label>Categoria:</label>
-          <input type="text" name="categoria" value={formData.categoria} onChange={handleInputChange} />
+          <SelectCategoria onChange={(id) => setIdCategoria(id)}/>
         </div>
       </form>
       <button onClick={handleNext}>Próxima Etapa</button>
