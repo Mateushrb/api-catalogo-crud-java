@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useEffect, useState } from 'react';
 import API from '../../Hooks/useAPI';
 
@@ -6,28 +7,41 @@ interface ProductData {
   descricao: string;
   preco: number;
   quantidade: number;
+=======
+import React, { useState } from 'react';
+import API from '../../Hooks/useAPI';
+import CategoryFilter from '../../Components/CategoryFilter';
+interface TypesProduto {
+  nome: string,
+  idImagem: string,
+  descricao: string,
+  preco: number,
+  quantidade: number,
+  categoria: {
+    nome: string,
+  },
+>>>>>>> parent of a660060 (update CadastroGeral)
 }
 
-interface Props {
-  onNext: (data: ProductData) => void;
-}
-
-const CadastroProduto: React.FC<Props> = ({ onNext }) => {
-  const [formData, setFormData] = useState<ProductData>({
+const CadastroProduto: React.FC = () => {
+  const [newProduto, setNewProduto] = useState<TypesProduto>({
     nome: '',
+    idImagem: '',
     descricao: '',
     preco: 0,
     quantidade: 0,
+    categoria: {
+      nome: '',
+    },
+
   });
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    setNewProduto({ ...newProduto, [name]: value });
   };
 
+<<<<<<< HEAD
   const handleNext = () => {
     
       API.postProduto(formData)
@@ -37,30 +51,88 @@ const CadastroProduto: React.FC<Props> = ({ onNext }) => {
         })
       onNext(formData);
       
+=======
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+
+    const handleCategoryChange = (categoryId: number) => {
+      setNewProduto({
+        ...newProduto,
+        categoria: { nome: categoryId.toString() },
+      });
+    };
+
+    API.postProduto(newProduto)
+      .then((data) => {
+        console.log('Produto cadastrado com sucesso:', data);
+        setNewProduto({
+          nome: '',
+          idImagem: '',
+          descricao: '',
+          preco: 0,
+          quantidade: 0,
+          categoria: {
+            nome: '',
+          },
+        });
+      })
+      .catch((error) => {
+        console.error('Erro ao cadastrar o Produto:', error);
+      });
+>>>>>>> parent of a660060 (update CadastroGeral)
   };
 
+  function handleCategoryChange(categoryId: number): void {
+    throw new Error('Function not implemented.');
+  }
+
   return (
-    <div>
-      <h2>Cadastro de Produto</h2>
-      <form>
-        <div>
-          <label>Nome:</label>
-          <input type="text" name="nome" value={formData.nome} onChange={handleInputChange} />
+    <div className='box'>
+      <h2 className='mb'>Cadastro de Produto</h2>
+      <form onSubmit={handleSubmit}>
+        <div className='mb flexColumn'>
+          <label className='cadastroLabel'>Nome do Produto:</label>
+          <input
+            className='cadastroInput'
+            type="text"
+            name="nome"
+            value={newProduto.nome}
+            onChange={handleInputChange}
+          />
         </div>
-        <div>
-          <label>Descrição:</label>
-          <input name="descricao" value={formData.descricao} onChange={handleInputChange} />
+        <div className='mb flexColumn'>
+          <label className='cadastroLabel'>Descrição:</label>
+          <input
+            className='cadastroInput'
+            type="text"
+            name="descricao"
+            value={newProduto.descricao}
+            onChange={handleInputChange}
+          />
         </div>
-        <div>
-          <label>Preço:</label>
-          <input type="number" name="preco" value={formData.preco} onChange={handleInputChange} />
+        <div className='mb flexColumn'>
+          <label className='cadastroLabel'>Preço:</label>
+          <input
+            className='cadastroInput'
+            type="number"
+            name="preco"
+            value={newProduto.preco}
+            onChange={handleInputChange}
+          />
         </div>
-        <div>
-          <label>Quantidade:</label>
-          <input type="number" name="quantidade" value={formData.quantidade} onChange={handleInputChange} />
+        <div className='mb flexColumn'>
+          <label className='cadastroLabel'>Quantidade:</label>
+          <input
+            className='cadastroInput'
+            type="number"
+            name="quantidade"
+            value={newProduto.quantidade}
+            onChange={handleInputChange}
+          />
         </div>
+        <CategoryFilter onSelectCategory={(categoryId) => handleCategoryChange(categoryId)} />
+        <button className='cadastroButton' type="submit">Cadastrar</button>
       </form>
-      <button onClick={handleNext}>Próxima Etapa</button>
     </div>
   );
 };

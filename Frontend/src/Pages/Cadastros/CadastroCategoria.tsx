@@ -3,7 +3,10 @@ import API from '../../Hooks/useAPI';
 import SelectCategoria from '../../Components/SelectCategoria';
 
 interface CategoryData {
-  categoria: string;
+  categoria: {
+    id: number,
+    nome: string
+  },
 }
 
 interface Props {
