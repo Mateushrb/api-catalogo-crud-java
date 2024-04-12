@@ -34,13 +34,13 @@ public class ProdutoController {
 	
 	@ApiOperation(value = "Cadastrar produto")
 	@PostMapping
-	public ResponseEntity<String> cadastrarProduto(@RequestBody Produto produto) {
+	public ResponseEntity<Produto> cadastrarProduto(@RequestBody Produto produto) {
 		try {
 			produtoService.salvarProduto(produto);
 		}catch (Exception exception) {
-			return new ResponseEntity<>("Erro ao cadastrar o Produto", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-		return new ResponseEntity<>("Produto cadastrado com sucesso!", HttpStatus.CREATED);
+		return new ResponseEntity<>(produto, HttpStatus.CREATED);
 	}
 	
 	@ApiOperation(value = "Buscar todos os produtos")
