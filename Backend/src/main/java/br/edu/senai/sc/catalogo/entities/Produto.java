@@ -33,15 +33,6 @@ public class Produto {
 	
 	private String idImagem = "";
 	
-	public String getIdImagem() {
-		if (this.imagem == null) {
-			return "Sem imagem";
-		} else {
-			this.idImagem = imagem.getId();
-			return idImagem;			
-		}
-	}
-	
 	public Produto() {}
 
 	public Produto(Long id, String nome, String descricao, Double preco, Long quantidade, Categoria categoria) {
@@ -109,6 +100,10 @@ public class Produto {
 	}
 	public void removeImagem() {
 		this.imagem = null;
+	}
+	
+	public String getIdImagem() {
+		return idImagem;
 	}
 	
 }
