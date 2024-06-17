@@ -109,4 +109,30 @@ public class ProdutoService {
 		return produto.get();
 	}
 	
+	public Produto aumentarQuantidade(Long codigoProduto) {
+		Optional<Produto> produto = produtoRepository.findById(codigoProduto);
+		Long quantidade = produto.get().getQuantidade();
+		if(Optional.ofNullable(produto).isPresent()) {
+			produto.get().setQuantidade(quantidade+1);
+			produtoRepository.save(produto.get());
+		}
+		return produto.get();
+	}
+	
+	public Produto diminuirProduto(Long codigoProduto) {
+		Optional<Produto> produto = produtoRepository.findById(codigoProduto);
+		Long quantidade = produto.get().getQuantidade();
+		if(Optional.ofNullable(produto).isPresent()) {
+			produto.get().setQuantidade(quantidade-1);
+			produtoRepository.save(produto.get());
+		}
+		return produto.get();
+	}
+	
 }
+
+
+
+
+
+

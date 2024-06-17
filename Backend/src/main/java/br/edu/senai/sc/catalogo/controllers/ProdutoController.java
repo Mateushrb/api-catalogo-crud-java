@@ -156,4 +156,33 @@ public class ProdutoController {
 		return new ResponseEntity<>("Imagem removida com sucesso!", HttpStatus.OK);
 	}
 	
+	@ApiOperation(value = "Aumentar produto")
+	@PatchMapping(value = "/aumentar/{codigo}")
+	public ResponseEntity<String> aumentarProduto(@PathVariable("codigo") Long codigo) {
+		try {
+			produtoService.aumentarQuantidade(codigo);
+		}catch (Exception except) {
+			return new ResponseEntity<>("Erro ao aumentar a quantidade do produto", HttpStatus.BAD_REQUEST);
+		}
+		return new ResponseEntity<>("Um produto foi adicionado a quantidade total", HttpStatus.OK);
+	}
+	
+	@ApiOperation(value = "Diminuir produto")
+	@PatchMapping(value = "/diminuir/{codigo}")
+	public ResponseEntity<String> diminuirProduto(@PathVariable("codigo") Long codigo) {
+		try {
+			produtoService.diminuirProduto(codigo);
+		}catch (Exception except) {
+			return new ResponseEntity<>("Erro ao diminuir a quantidade do produto", HttpStatus.BAD_REQUEST);
+		}
+		return new ResponseEntity<>("Um produto foi removido da quantidade total", HttpStatus.OK);
+	}
+	
 }
+
+
+
+
+
+
+
