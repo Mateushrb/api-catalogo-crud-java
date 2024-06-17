@@ -94,10 +94,7 @@ public class ProdutoController {
 	@PutMapping
 	public ResponseEntity<String> alterarProduto(@RequestBody Produto produto) {
 		try {
-			System.out.println(produto.getId());
-			System.out.println(produto.getIdImagem());
 			produtoService.salvarProduto(produto);
-			produtoService.addImagem(produto.getId(), produto.getIdImagem());
 		}catch (Exception exception) {
 			return new ResponseEntity<>("Erro ao atualizar Produto!", HttpStatus.BAD_REQUEST);
 		}
