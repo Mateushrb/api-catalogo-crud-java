@@ -26,7 +26,7 @@ public class SwaggerConfiguration {
 	
 	private ApiInfo infosApi() {
 		return new ApiInfoBuilder()
-				.version("1.0")
+				.version("1.2")
 				.title("API - Catalogo de produtos")
 				.description("API para cadastro de produtos.\nPara cadastrar um produto é necessário fornecer um nome, descrição, preço e quantidade.\nTambém é possível cadastrar uma categoria, fornecendo apenas o nome e em seguida adicioná-la a um produto.\n\nOs seguintes métodos estão disponíveis: Create, Read, Update, Delete e Patch.")
 				.termsOfServiceUrl("https://sc.senai.br/")

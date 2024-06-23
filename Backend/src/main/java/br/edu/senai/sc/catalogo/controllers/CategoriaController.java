@@ -86,7 +86,7 @@ public class CategoriaController {
 		}catch (Exception exception) {
 			return new ResponseEntity<>("Erro ao excluir a Categoria", HttpStatus.BAD_REQUEST);
 		}
-		return new ResponseEntity<>("Categoria excluida com sucesso", HttpStatus.OK);
+		return new ResponseEntity<>("Categoria excluída com sucesso", HttpStatus.OK);
 	}
 	
 	@ApiOperation(value = "Alterar categoria")

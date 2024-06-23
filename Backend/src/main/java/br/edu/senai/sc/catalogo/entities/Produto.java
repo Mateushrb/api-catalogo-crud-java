@@ -26,6 +26,10 @@ public class Produto {
 	@JoinColumn(name = "categoria_id")
 	private Categoria categoria;
 	
+	@ManyToOne
+	@JoinColumn(name = "marca_id")
+	private Marca marca;
+	
 	@JsonIgnore
 	@OneToOne
 	@JoinColumn(name = "imagem_id")
@@ -35,13 +39,14 @@ public class Produto {
 	
 	public Produto() {}
 
-	public Produto(Long id, String nome, String descricao, Double preco, Long quantidade, Categoria categoria) {
+	public Produto(Long id, String nome, String descricao, Double preco, Long quantidade, Categoria categoria, Marca marca) {
 		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
 		this.preco = preco;
 		this.quantidade = quantidade;
 		this.categoria = categoria;
+		this.marca = marca;
 	}
 
 	public Long getId() {
@@ -90,6 +95,14 @@ public class Produto {
 
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
+	}
+	
+	public Marca getMarca() {
+		return marca;
+	}
+	
+	public void setMarca(Marca marca) {
+		this.marca = marca;
 	}
 	
 	public Imagem getImagem() {
