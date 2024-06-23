@@ -134,6 +134,28 @@ public class ProdutoController {
 		return new ResponseEntity<>("Categoria removida com sucesso!", HttpStatus.OK);
 	}
 	
+	@ApiOperation(value = "Adicionar marca")
+	@PatchMapping("/addMarca")
+	public ResponseEntity<String> addMarca(@RequestParam("produto") Long codigoProduto, @RequestParam("marca") Long codigoMarca) {
+		try {
+			produtoService.addMarca(codigoProduto, codigoMarca);
+		}catch (Exception exception) {
+			return new ResponseEntity<>("Erro ao adicionar a Marca!", HttpStatus.BAD_REQUEST);
+		}
+		return new ResponseEntity<>("Marca adicionada com sucesso!", HttpStatus.OK);
+	}
+	
+	@ApiOperation(value = "Remover marca")
+	@PatchMapping("/removeMarca/{codigo}")
+	public ResponseEntity<String> removeMarca(@PathVariable("codigo") Long codigo) {
+		try {
+			produtoService.removeMarca(codigo);
+		}catch (Exception exception) {
+			return new ResponseEntity<>("Erro ao remover a Marca!", HttpStatus.BAD_REQUEST);
+		}
+		return new ResponseEntity<>("Marca removida com sucesso!", HttpStatus.OK);
+	}
+	
 	@ApiOperation(value = "Adicionar imagem")
 	@PatchMapping(value = "/addImagem")
 	public ResponseEntity<String> addImagem(@RequestParam("produto") Long codigoProduto, @RequestParam("imagem") String codigoImagem) {

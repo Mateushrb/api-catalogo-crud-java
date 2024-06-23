@@ -11,6 +11,8 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+
+
 @Entity
 public class Marca {
 	
@@ -39,7 +41,6 @@ public class Marca {
 		this.nome = nome;
 		this.produtos = produtos;
 	}
-	
 	public Long getId() {
 		return id;
 	}
@@ -63,6 +64,8 @@ public class Marca {
 	public void setProdutos(List<Produto> produtos) {
 		this.produtos = produtos;
 	}
+	
+	
 }
 
 

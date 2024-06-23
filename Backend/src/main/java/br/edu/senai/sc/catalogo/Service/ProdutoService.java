@@ -7,9 +7,11 @@ import org.springframework.stereotype.Service;
 
 import br.edu.senai.sc.catalogo.Repository.CategoriaRepository;
 import br.edu.senai.sc.catalogo.Repository.ImagemRepository;
+import br.edu.senai.sc.catalogo.Repository.MarcaRepository;
 import br.edu.senai.sc.catalogo.Repository.ProdutoRepository;
 import br.edu.senai.sc.catalogo.entities.Categoria;
 import br.edu.senai.sc.catalogo.entities.Imagem;
+import br.edu.senai.sc.catalogo.entities.Marca;
 import br.edu.senai.sc.catalogo.entities.Produto;
 
 @Service
@@ -17,11 +19,13 @@ public class ProdutoService {
 
 	private final ProdutoRepository produtoRepository;
 	private final CategoriaRepository categoriaRepository;
+	private final MarcaRepository marcaRepository;
 	private final ImagemRepository imagemRepository;
 	
-	public ProdutoService(ProdutoRepository produtoRepository, CategoriaRepository categoriaRepository, ImagemRepository imagemRepository) {
+	public ProdutoService(ProdutoRepository produtoRepository, CategoriaRepository categoriaRepository, MarcaRepository marcaRepository, ImagemRepository imagemRepository) {
 		this.produtoRepository = produtoRepository;
 		this.categoriaRepository = categoriaRepository;
+		this.marcaRepository = marcaRepository;
 		this.imagemRepository = imagemRepository;
 	}
 
@@ -81,6 +85,31 @@ public class ProdutoService {
 			categoria.removeProduto(produto.get());
 			produtoRepository.save(produto.get());
 			categoriaRepository.save(categoria);
+		}
+		return produto.get();
+	}
+	
+	public Produto addMarca(Long codigoProduto, Long codigoMarca) {
+		Optional<Produto> produto = produtoRepository.findById(codigoProduto);
+		Optional<Marca> marca = marcaRepository.findById(codigoMarca);
+		
+		if(Optional.ofNullable(produto).isPresent() && Optional.ofNullable(marca).isPresent()) {
+			produto.get().setMarca(marca.get());
+			marca.get().addProduto(produto.get());
+			produtoRepository.save(produto.get());
+			marcaRepository.save(marca.get());
+		}
+		return produto.get();
+	}
+	
+	public Produto removeMarca(Long codigoProduto) {
+		Optional<Produto> produto = produtoRepository.findById(codigoProduto);
+		Marca marca = produto.get().getMarca();
+		if(Optional.ofNullable(produto).isPresent()) {
+			produto.get().setMarca(null);
+			marca.removeProduto(produto.get());
+			produtoRepository.save(produto.get());
+			marcaRepository.save(marca);
 		}
 		return produto.get();
 	}
