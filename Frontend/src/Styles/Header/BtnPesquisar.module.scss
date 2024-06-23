@@ -1,0 +1,22 @@
+@import "../Mixins/variables.scss";
+
+.BtnPesquisar {
+    background-color: $colorBlue03;
+    color: $colorWhite01;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.4s ease, color 0.4s ease;
+    outline: none;
+    font-weight: 600;
+    font-size: 16px;
+    max-width: 156px;
+    width: 100%;
+    text-transform: uppercase;
+
+    &:hover {
+        background-color: $colorGrey01;
+        color: $colorBlack01;
+    }
+}

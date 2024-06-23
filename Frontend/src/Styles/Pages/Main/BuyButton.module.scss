@@ -1,0 +1,24 @@
+@import "../../Mixins/variables.scss";
+
+.BuyButton {
+    background-color: $colorGreen01;
+    color: $colorWhite01;
+    text-transform: uppercase;
+    border: none;
+    padding: 10px 16px;
+    align-items: center;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.4s ease, color 0.4s ease;
+    outline: none;
+    font-weight: 600;
+    letter-spacing: 0.6px;
+    font-size: 13px;
+    max-width: 306px;
+    width: 100%;
+
+    &:hover {
+        background-color: $colorGreen02;
+        color: $colorWhite01;
+    }
+}

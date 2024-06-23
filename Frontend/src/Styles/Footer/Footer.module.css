@@ -1,0 +1,26 @@
+.Footer {
+  background-color: #1E152A;
+  box-sizing: border-box;
+  color: #ffffff;
+  width: 100%;
+  flex: 0;
+}
+.Footer__container {
+  height: 120px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+.Footer__childrenOne {
+  align-items: center;
+  display: flex;
+}
+.Footer__logoSenai {
+  width: 120px;
+}
+.Footer__title, .Footer__subtitle {
+  font-size: 14px;
+  margin: 0;
+}/*# sourceMappingURL=Footer.module.css.map */

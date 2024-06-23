@@ -1,0 +1,18 @@
+.BuyButton {
+    display: flex;
+    background-color: #f3bd5b;
+    color: #EEEEEE;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.4s ease, color 0.4s ease;
+    outline: none;
+}
+
+.BuyButton:focus-visible {
+    outline: none;
+}
+.BuyButton:focus {
+    outline: none;
+}

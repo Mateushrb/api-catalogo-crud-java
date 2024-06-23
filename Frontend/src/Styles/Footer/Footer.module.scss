@@ -1,0 +1,33 @@
+@import "../Mixins/variables.scss";
+
+.Footer {
+  background-color: $colorBlue01;
+  box-sizing: border-box;
+  color: $colorWhite01;
+  width: 100%;
+  flex-shrink: 0;
+
+  &__container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    height: 120px;
+  }
+
+  &__childrenOne{
+    align-items: center;
+    display: flex;
+  }
+
+  &__logoSenai {
+    width: 120px;
+  }
+
+  &__title,
+  &__subtitle {
+    font-size: 14px;
+    margin: 0;
+  }
+}

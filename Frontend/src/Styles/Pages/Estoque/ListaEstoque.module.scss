@@ -1,0 +1,203 @@
+@import "../../../Styles/Mixins/variables.scss";
+
+.Search {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    &__Content {
+        display: flex;
+        align-items: center;
+        position: relative;
+        justify-content: flex-start;
+        width: 100%;
+
+        &__InputSearch {
+            padding-right: 36px;
+            max-width: 400px;
+            padding: 5px 12px;
+            width: 100%;
+            border: 1px solid #a7a7a7;
+            border-radius: 8px;
+            transition: border-color 0.4s ease;
+            color: $colorGrey02;
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.5;
+            font-weight: 400;
+            height: 24px;
+
+            &:focus {
+                outline: none;
+            }
+
+            &:focus-visible {
+                border: solid 1px #676767;
+            }
+
+            &::placeholder {
+                color: $colorGrey02;
+                font-weight: 500;
+                font-size: 14px;
+                font-family: 'Poppins', sans-serif;
+                line-height: 1.5;
+                font-weight: 400;
+            }
+        }
+
+        &__Icon {
+            position: absolute;
+            top: 50%;
+            left: 390px;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+    }
+}
+
+
+.table {
+    width: 100%;
+    margin-top: 30px;
+    border-collapse: collapse;
+
+    &__tHeader {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ccc;
+        font-weight: 500;
+        letter-spacing: 0.3px;
+        color: #ffff;
+        background-color: #0554F2;
+
+        &__Button {
+            text-align: center;
+            background-color: #0554F2;
+            color: #ffff;
+            letter-spacing: 0.3px;
+            font-weight: 500;
+            border-top-right-radius: 12px 12px;
+        }
+
+        &__left {
+            text-align: center;
+            background-color: #0554F2;
+            color: #ffff;
+            letter-spacing: 0.3px;
+            font-weight: 500;
+            border-top-left-radius: 12px 12px;
+        }
+    }
+
+    &__TableSection {
+        border: 1px solid #bbbfbf;
+    }
+
+    &__tRow {
+        text-align: left;
+        border-bottom: 1px solid #d4d4d4;
+        background-color: #fafafa;
+    }
+
+    &__tDetailed {
+        padding: 12px;
+        background-color: #fafafa;
+        letter-spacing: 0.3px;
+        font-weight: 400;
+        font-size: 14px;
+        color: black;
+
+        &__idProduto {
+            padding: 12px;
+            background-color: #fafafa;
+            letter-spacing: 0.3px;
+            font-weight: 600;
+            font-size: 14px;
+            color: black;
+        }
+
+        &:hover {
+            background-color: #e4e4e4ab;
+            cursor: pointer;
+        }
+
+        &__Buttons {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            padding: 12px;
+            gap: 12px;
+            background-color: #fafafa;
+        }
+
+        &__ButtonVisualizar {
+            background-color: #6f6f6fa0;
+            color: white;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            letter-spacing: 0.4px;
+            transition: background-color 0.6s ease;
+
+            &:hover {
+                background-color: #707070b7;
+            }
+        }
+    }
+
+    &__tDetailedImagem {
+        max-width: 80px;
+        height: 60px;
+    }
+}
+
+.ReportButtonContainer {
+    display: flex;
+    justify-content: end;
+    gap: 10px;
+    margin: 0 0 10px;
+}
+
+.ReportIcon {
+    width: 32px;
+    height: 32px;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+
+    &:hover {
+        transform: scale(1.2);
+    }
+}
+
+.circle {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    left: 20px;
+}
+
+.circle--available {
+    background-color: #3cc43c;
+    animation: blink 1.5s infinite;
+}
+
+.circle--unavailable {
+    background-color: #ff4545;
+    animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.7;
+    }
+}

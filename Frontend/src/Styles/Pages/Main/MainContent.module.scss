@@ -1,0 +1,358 @@
+@import "../../Mixins/variables.scss";
+
+.Main {
+    flex-grow: 1;
+    max-width: 1256px;
+    margin: 0 auto;
+    padding: 140px 0 60px;
+
+    &__carregando {
+        color: $colorBlack01;
+    }
+
+    &__container {
+
+        &__filtros {
+            display: flex;
+            gap: 10px;
+            justify-content: end;
+        }
+
+        &__searchInput {
+            margin: 40px 0 25px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            justify-content: flex-end;
+
+            &__lupaIcon {
+                position: absolute;
+                top: 50%;
+                right: 10px;
+                transform: translateY(-50%);
+                cursor: pointer;
+            }
+
+            &__Styles {
+                padding-right: 36px;
+                max-width: 450px;
+                padding: 5px 12px;
+                width: 100%;
+                border: 1px solid #a7a7a7;
+                border-radius: 8px;
+                transition: border-color 0.4s ease;
+                height: 24px;
+
+                &:focus {
+                    outline: none;
+                }
+
+                &:focus-visible {
+                    border: solid 1px #676767;
+                }
+
+                &::placeholder {
+                    color: $colorGrey02;
+                    font-weight: 500;
+                    font-size: 14px;
+                    font-family: 'Poppins', sans-serif;
+                    line-height: 1.5;
+                    font-weight: 400;
+                }
+            }
+        }
+
+        &__notProduct {
+            color: $colorBlack01;
+            max-width: 450px;
+            font-size: 24px;
+            line-height: 1.5;
+            font-weight: 500;
+            width: 100%;
+        }
+
+        &__richTextTitle {
+            color: $colorBlack01;
+            font-size: 22px;
+            font-weight: 700;
+            line-height: 22px;
+            letter-spacing: .01em;
+            text-align: left;
+            text-transform: none;
+        }
+
+        &__ul {
+            display: grid;
+            padding: 0;
+            gap: 12px;
+            margin: 0 0 40px;
+            grid-template-columns: repeat(4, 1fr);
+
+            &__li {
+                box-shadow: 5px 5px 15px rgba(183, 183, 183, 0.5);
+                display: flex;
+                flex-direction: column;
+                border-radius: 8px;
+                padding: 10px 20px;
+                justify-content: space-around;
+                position: relative;
+            }
+        }
+
+        &__imagem {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 14px;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        &__imagemStyle {
+            max-height: 146px;
+            min-height: 210px;
+            max-width: 260px;
+        }
+
+        &__productInfo {
+            margin-bottom: 20px;
+
+            &__NameCategory {
+                margin-bottom: 30px;
+
+            }
+
+            &__NameCategory h3 {
+                color: $colorBlack01;
+                font-size: 14px;
+                font-weight: 600;
+                line-height: 22px;
+                letter-spacing: 0.01em;
+                text-align: left;
+                margin: 0 0 6px;
+                margin-bottom: 2px;
+                display: flex;
+                width: 100%;
+                flex-direction: column;
+            }
+
+            &__NameCategory p {
+                color: $colorBlack01;
+                font-size: 12px;
+                font-weight: 400;
+                line-height: 22px;
+                letter-spacing: 0.01em;
+                text-align: left;
+                margin: 0;
+            }
+
+            &__PriceQuantity {
+                color: $colorBlack01;
+                font-size: 16px;
+                font-weight: 600;
+                line-height: 22px;
+                letter-spacing: 0.01em;
+                text-align: left;
+                margin: 0 0 6px;
+                border-top: 2px solid $colorGrey01;
+
+                & p {
+                    margin: 0 auto;
+                    padding: 0;
+                    font-size: 12px;
+                    color: $colorBlack01;
+                    font-weight: 500;
+                    margin: 5px 0 0;
+
+                    & .spanQuantity {
+                        color: $colorBlack01;
+                        font-size: 16px;
+                    }
+                }
+
+                & span {
+                    font-size: 32px;
+                    font-weight: 700;
+                    color: $colorBlue01;
+                }
+            }
+        }
+
+        &__ShowMoreButton {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        &__ButtonStyle {
+            background-color: $colorBlue03;
+            color: $colorWhite01;
+            text-transform: uppercase;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.4s ease, color 0.4s ease;
+            outline: none;
+            font-weight: 600;
+            font-size: 13px;
+            max-width: 226px;
+            width: 100%;
+            display: flex;
+            letter-spacing: 0.6px;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+
+            &:hover {
+                background-color: $colorBlue01;
+                color: $colorWhite01;
+            }
+        }
+
+        &__Wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            &__carrinho {
+                display: flex;
+                align-items: center;
+                position: relative;
+                cursor: pointer;
+            }
+
+            &__contadorCliques {
+                font-size: 12px;
+                color: $colorWhite01;
+                position: absolute;
+                text-align: center;
+                align-items: center;
+                top: -27px;
+                justify-content: center;
+                right: -1px;
+                border-radius: 50%;
+                width: 22px;
+                height: 22px;
+                background-color: $colorBlue01;
+                display: flex;
+            }
+        }
+
+        &__buttonGroup {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin-top: 5px;
+            gap: 20px;
+
+            &__maismenos {
+                gap: 12px;
+                display: flex;
+            }
+
+            &__excluirButton {
+                padding: 10px 20px;
+                border-radius: 8px;
+                font-size: 0;
+                color: $colorWhite01;
+                background-color: #ff594d;
+                letter-spacing: 0.4px;
+                border: none;
+                cursor: pointer;
+                transition: background-color 0.4s ease, color 0.4s ease;
+                position: relative;
+
+                &::before {
+                    content: '';
+                    display: inline-block;
+                    width: 19px;
+                    height: 19px;
+                    background-image: url('../../../assets/icon_trash.svg');
+                    background-repeat: no-repeat;
+                    background-color: #cccccc00;
+                    background-position: center;
+                    background-size: cover;
+                    vertical-align: middle;
+                }
+
+                &:hover {
+                    background-color: #dc2e2e;
+                }
+
+            }
+
+            &__maisButton {
+                padding: 10px 20px;
+                border-radius: 8px;
+                font-size: 0;
+                color: $colorWhite01;
+                background-color: #24cb51;
+                border: none;
+                cursor: pointer;
+                transition: background-color 0.4s ease, color 0.4s ease;
+                position: relative;
+
+                &::before {
+                    content: '';
+                    display: inline-block;
+                    width: 19px;
+                    height: 19px;
+                    background-image: url('../../../assets/icon_plus.svg');
+                    background-repeat: no-repeat;
+                    background-color: #cccccc00;
+                    background-position: center;
+                    background-size: cover;
+                    vertical-align: middle;
+                }
+
+                &:hover {
+                    background-color: #0f840f;
+                }
+            }
+
+            &__menosButton {
+                padding: 10px 20px;
+                border-radius: 8px;
+                font-size: 0px;
+                border: none;
+                color: $colorWhite01;
+                background-color: $colorBlue03;
+                cursor: pointer;
+                transition: background-color 0.4s ease, color 0.4s ease;
+                position: relative;
+
+                &::before {
+                    content: '';
+                    display: inline-block;
+                    width: 19px;
+                    height: 19px;
+                    background-image: url('../../../assets/icon_minus.svg');
+                    background-repeat: no-repeat;
+                    background-color: #cccccc00;
+                    background-position: center;
+                    background-size: cover;
+                    vertical-align: middle;
+                }
+
+                &:hover {
+                    background-color: $colorBlue01;
+                }
+            }
+        }
+
+        &__SearchFilter {
+            display: flex;
+            flex-direction: column;
+            margin: 0 0 26px;
+        }
+
+    }
+}
+
+.menosButtonDisabled {
+    background-color: $colorBlue03;
+    cursor: not-allowed;
+    opacity: 0.3;
+    border: none;
+}

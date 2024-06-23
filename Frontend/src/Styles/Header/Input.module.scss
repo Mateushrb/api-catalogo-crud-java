@@ -1,0 +1,22 @@
+@import "../Mixins/variables.scss";
+
+.Input {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    margin-right: 14px;
+    transition: border-color 0.4s ease;
+
+    &:focus {
+        outline: none;
+    }
+
+    &:focus-visible {
+        border: solid 3px $colorYellow01;
+    }
+
+    &::placeholder {
+        color: $colorGrey02;
+    }
+}
