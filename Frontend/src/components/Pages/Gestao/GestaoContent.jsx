@@ -3,118 +3,99 @@ import Styles from '../../../Styles/Pages/Gestao/GestaoContent.module.scss';
 import bannerImage from '../../../assets/banner-analise.png';
 
 function GestaoContent() {
-  const [products, setProducts] = useState([]);
-  const [lowStockPercentage, setLowStockPercentage] = useState(0);
-  const [highStockPercentage, setHighStockPercentage] = useState(0);
-  const [totalPrice, setTotalPrice] = useState(0);
-  const [error, setError] = useState(null);
-  const [showDataAnalysis, setShowDataAnalysis] = useState(false);
-  const [showPromotionsAnalysis, setShowPromotionsAnalysis] = useState(false);
-  const [showFinancialAnalysis, setShowFinancialAnalysis] = useState(false);
+  const [produtos, setProdutos] = useState([]);
+  const [quantidadeBaixoEstoque, setQuantidadeBaixoEstoque] = useState(0);
+  const [quantidadeAltoEstoque, setQuantidadeAltoEstoque] = useState(0);
+  const [precoTotal, setPrecoTotal] = useState(0);
+  const [erro, setErro] = useState(null);
+  const [mostrarAnaliseDados, setMostrarAnaliseDados] = useState(false);
+  const [mostrarAnalisePromocoes, setMostrarAnalisePromocoes] = useState(false);
+  const [mostrarAnaliseFinanceira, setMostrarAnaliseFinanceira] = useState(false);
 
   useEffect(() => {
-    if (showDataAnalysis || showPromotionsAnalysis || showFinancialAnalysis) {
-      fetchProducts();
+    if (mostrarAnaliseDados || mostrarAnalisePromocoes || mostrarAnaliseFinanceira) {
+      buscarProdutos();
     }
-  }, [showDataAnalysis, showPromotionsAnalysis, showFinancialAnalysis]);
+  }, [mostrarAnaliseDados, mostrarAnalisePromocoes, mostrarAnaliseFinanceira]);
 
-  const fetchProducts = async () => {
+  const buscarProdutos = async () => {
     try {
       const response = await fetch('http://45.235.53.125:8080/api/produto');
       if (!response.ok) {
         throw new Error('Erro ao buscar dados da API');
       }
       const data = await response.json();
-      setProducts(data);
+      setProdutos(data);
 
-      const lowStockProducts = data.filter(product => product.quantidade <= 10);
-      const highStockProducts = data.filter(product => product.quantidade > 50);
-      const totalProducts = data.length;
+      const produtosBaixoEstoque = data.filter(produto => produto.quantidade > 0 && produto.quantidade <= 10);
+      const produtosAltoEstoque = data.filter(produto => produto.quantidade > 11);
 
-      const lowStockPercentage = (lowStockProducts.length / totalProducts) * 100;
-      const highStockPercentage = (highStockProducts.length / totalProducts) * 100;
+      console.log('Total de Produtos:', data.length);
+      console.log('Produtos com Baixo Estoque:', produtosBaixoEstoque.length);
+      console.log('Produtos com Alto Estoque:', produtosAltoEstoque.length);
 
-      setLowStockPercentage(lowStockPercentage);
-      setHighStockPercentage(highStockPercentage);
+      setQuantidadeBaixoEstoque(produtosBaixoEstoque.length);
+      setQuantidadeAltoEstoque(produtosAltoEstoque.length);
 
-      const total = data.reduce((accumulator, product) => accumulator + product.preco, 0);
-      setTotalPrice(total);
+      const total = data.reduce((accumulator, produto) => accumulator + produto.preco, 0);
+      setPrecoTotal(total);
     } catch (error) {
       console.error('Erro ao buscar dados da API:', error);
-      setError('Erro ao carregar os dados. Por favor, tente novamente mais tarde.');
+      setErro('Erro ao carregar os dados. Por favor, tente novamente mais tarde.');
     }
   };
 
-  const getProgressBarColor = (percentage) => {
-    if (percentage < 30) {
-      return 'green';
-    } else if (percentage < 70) {
-      return 'orange';
-    } else {
-      return 'red';
-    }
+  const formatarPreco = (valor) => {
+    return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
   };
 
-  const handleDataAnalysisClick = () => {
-    setShowDataAnalysis(true);
-    setShowPromotionsAnalysis(false);
-    setShowFinancialAnalysis(false);
+  const handleAnaliseDadosClick = () => {
+    setMostrarAnaliseDados(true);
+    setMostrarAnalisePromocoes(false);
+    setMostrarAnaliseFinanceira(false);
   };
 
-  const handlePromotionsClick = () => {
-    setShowPromotionsAnalysis(true);
-    setShowDataAnalysis(false);
-    setShowFinancialAnalysis(false);
+  const handlePromocoesClick = () => {
+    setMostrarAnalisePromocoes(true);
+    setMostrarAnaliseDados(false);
+    setMostrarAnaliseFinanceira(false);
   };
 
-  const handleFinancialClick = () => {
-    setShowFinancialAnalysis(true);
-    setShowDataAnalysis(false);
-    setShowPromotionsAnalysis(false);
+  const handleFinanceiraClick = () => {
+    setMostrarAnaliseFinanceira(true);
+    setMostrarAnaliseDados(false);
+    setMostrarAnalisePromocoes(false);
   };
 
   return (
     <>
       <main className={Styles.GestaoContent}>
         <div className={Styles.GestaoContent__bannerContainer}>
-          <img className={Styles.GestaoContent__bannerContainer__image} src={bannerImage} alt="Banner"/>
+          <img className={Styles.GestaoContent__bannerContainer__image} src={bannerImage} alt="Banner" />
         </div>
         <h2 className={Styles.GestaoContent__title}>Página de Gestão</h2>
         <div className={Styles.GestaoContainer}>
           <div className={Styles.GestaoContainer__box}>
-            <a className={Styles.GestaoContainer__subtitle} href="#" onClick={handleDataAnalysisClick}>Análise de Dados</a>
-            <a className={Styles.GestaoContainer__subtitle} href="#" onClick={handlePromotionsClick}>Gestão de Promoções e Descontos</a>
-            <a className={Styles.GestaoContainer__subtitle} href="#" onClick={handleFinancialClick}>Gestão Financeira e Contabilidade</a>
+            <a className={Styles.GestaoContainer__subtitle} href="#" onClick={handleAnaliseDadosClick}>Análise de Dados</a>
+            <a className={Styles.GestaoContainer__subtitle} href="#" onClick={handlePromocoesClick}>Gestão de Promoções e Descontos</a>
           </div>
         </div>
         <div className={Styles.containerAnalise}>
-          {showDataAnalysis && (
+          {mostrarAnaliseDados && (
             <div className={Styles.containerAnalise__content}>
               <h2 className={Styles.containerAnalise__content__title}>Análise de Dados</h2>
               <div>
-                <p className={Styles.containerAnalise__content__subtitle}>Total de produtos cadastrados: {products.length}</p>
-                <p className={Styles.containerAnalise__content__subtitle}>Produtos com alto estoque:</p>
-                <div className="progress-bar" style={{ width: '300px', backgroundColor: '#EBEBEB', borderRadius: '8px'}}>
-                  <div className="progress" style={{ width: `${highStockPercentage}%`, backgroundColor: getProgressBarColor(highStockPercentage) }}>{highStockPercentage.toFixed(2)}%</div>
-                </div>
-                <br />
-                <p className={Styles.containerAnalise__content__subtitle} >Produtos com baixo estoque:</p>
-                <div className="progress-bar" style={{ width: '300px', backgroundColor: '#EBEBEB', borderRadius: '8px'}}>
-                  <div className="progress" style={{ width: `${lowStockPercentage}%`, backgroundColor: getProgressBarColor(lowStockPercentage) }}>{lowStockPercentage.toFixed(2)}%</div>
-                </div>
+                <p className={Styles.containerAnalise__content__subtitle}>Total de produtos cadastrados: {produtos.length}</p>
+                <p className={Styles.containerAnalise__content__subtitle}>Produtos com alto estoque: {quantidadeAltoEstoque}</p>
+                <p className={Styles.containerAnalise__content__subtitle}>Produtos com baixo estoque: {quantidadeBaixoEstoque}</p>
+                <p className={Styles.containerAnalise__content__subtitle}>Valor total dos preços dos produtos: {formatarPreco(precoTotal)}</p>
               </div>
             </div>
           )}
-          {showPromotionsAnalysis && (
+          {mostrarAnalisePromocoes && (
             <div className={Styles.containerAnalise__content}>
               <h2 className={Styles.containerAnalise__content__title}>Gestão de Promoções e Descontos</h2>
               <p className={Styles.containerAnalise__content__subtitle}>No momento não há promoções ou descontos disponíveis.</p>
-            </div>
-          )}
-          {showFinancialAnalysis && (
-            <div className={Styles.containerAnalise__content}>
-              <h2 className={Styles.containerAnalise__content__title}>Gestão Financeira e Contabilidade</h2>
-              <p className={Styles.containerAnalise__content__subtitle}>Aqui você pode visualizar e analisar dados financeiros e contábeis.</p>
             </div>
           )}
         </div>

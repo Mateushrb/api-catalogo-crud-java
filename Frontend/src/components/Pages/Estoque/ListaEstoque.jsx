@@ -111,6 +111,7 @@ const ListaEstoque = () => {
                         <th className={styles.table__tHeader__left}>ID</th>
                         <th className={styles.table__tHeader}>Nome</th>
                         <th className={styles.table__tHeader}>Categoria</th>
+                        <th className={styles.table__tHeader}>Marca</th>
                         <th className={styles.table__tHeader}>Preço</th>
                         <th className={styles.table__tHeader}>Quantidade</th>
                         <th className={styles.table__tHeader}>Status</th>
@@ -123,12 +124,13 @@ const ListaEstoque = () => {
                             <td className={styles.table__tDetailed__idProduto}>{produto.id}</td>
                             <td className={styles.table__tDetailed}>{produto.nome}</td>
                             <td className={styles.table__tDetailed}>{produto.categoria?.nome}</td>
+                            <td className={styles.table__tDetailed}>{produto.marca?.nome}</td>
                             <td className={styles.table__tDetailed}>
                                 {typeof produto.preco === 'number' && produto.preco !== null && produto.preco !== undefined ? formatarPreco(produto.preco) : ''}
                             </td>
                             <td className={styles.table__tDetailed}>{produto.quantidade} un.</td>
                             <td className={styles.table__tDetailed}>
-                                <div className={`${styles.circle} ${produto.quantidade > 0 ? styles['circle--available'] : styles['circle--unavailable']}`}></div>
+                                <div className={`${styles.circle} ${produto.quantidade > 11 ? styles['circle--available'] : styles['circle--unavailable']}`}></div>
                             </td>
                             <td className={styles.table__tDetailed__Buttons}>
                                 <EditButton product={produto} onEdit={handleEdit} />

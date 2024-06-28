@@ -10,7 +10,7 @@ function FiltroCategorias({ categorias, categoriaSelecionada, onCategoriaChange 
   return (
     <div className={Styles.Main}>
       <select className={Styles.Main__select} value={categoriaSelecionada || ''} onChange={handleCategoriaChange}>
-        <option className={Styles.Main__option} value="">Pesquisa por filtro</option>
+        <option className={Styles.Main__option} value="">Filtrar por categoria</option>
         {categorias.map(categoria => (
           <option key={categoria.id} value={categoria.id}>{categoria.nome}</option>
         ))}

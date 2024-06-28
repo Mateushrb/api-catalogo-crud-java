@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import styles from './BrandModal.module.scss';
 
 const BrandModal = ({ onClose }) => {
@@ -11,28 +13,44 @@ const BrandModal = ({ onClose }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+
+            const checkResponse = await fetch(`http://45.235.53.125:8080/api/marca/nome?nome=${marca}`);
+            if (checkResponse.ok) {
+                const checkData = await checkResponse.json();
+                if (checkData.length > 0) {
+                    toast.error('Marca já cadastrada.');
+                    return;
+                }
+            }
+
+
             const response = await fetch('http://45.235.53.125:8080/api/marca', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ id: 0, nome: marca }), // Ajustado para o formato correto
+                body: JSON.stringify({ id: 0, nome: marca }),
             });
 
             if (response.ok) {
-                alert('Marca adicionada com sucesso!');
-                onClose();
+                const id = toast.success('Marca adicionada com sucesso!', {
+                    onClose: () => {
+                        onClose();
+                        window.location.reload();
+                    }
+                });
             } else {
-                alert('Falha ao adicionar a marca.');
+                toast.error('Falha ao adicionar a marca.');
             }
         } catch (error) {
             console.error('Erro:', error);
-            alert('Erro ao adicionar a marca.');
+            toast.error('Erro ao adicionar a marca.');
         }
     };
 
     return (
         <div className={styles.modal}>
+            <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
             <div className={styles.modalContent}>
                 <button className={styles.modalContent__closeButton} onClick={onClose}>x</button>
                 <h2 className={styles.modalContent__Heading}>Adicionar nova marca</h2>
