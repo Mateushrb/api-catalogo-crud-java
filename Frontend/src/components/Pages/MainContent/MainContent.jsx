@@ -28,7 +28,7 @@ function MainContent() {
         const [produtosData, categoriasData, marcasData] = await Promise.all([
           API.getProduto(),
           API.getCategoria(),
-          API.getMarca() // Buscar marcas na API
+          API.getMarca()
         ]);
 
         const produtosWithQuantity = produtosData.map(produto => ({

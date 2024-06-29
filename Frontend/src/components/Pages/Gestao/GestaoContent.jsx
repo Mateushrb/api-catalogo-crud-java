@@ -37,7 +37,7 @@ function GestaoContent() {
       setQuantidadeBaixoEstoque(produtosBaixoEstoque.length);
       setQuantidadeAltoEstoque(produtosAltoEstoque.length);
 
-      const total = data.reduce((accumulator, produto) => accumulator + produto.preco, 0);
+      const total = data.reduce((accumulator, produto) => accumulator + (produto.preco * produto.quantidade), 0);
       setPrecoTotal(total);
     } catch (error) {
       console.error('Erro ao buscar dados da API:', error);

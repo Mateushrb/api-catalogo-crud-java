@@ -1,5 +1,3 @@
-// FiltroMarcas.jsx
-
 import React from "react";
 import Styles from '../../Styles/Pages/Main/FiltroMarcas.module.scss';
 

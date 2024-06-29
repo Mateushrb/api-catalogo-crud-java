@@ -8,7 +8,7 @@ import AddBrandButton from './AddMarca/AddBrandButton';
 
 function EstoqueContent() {
   const [categorias, setCategorias] = useState([]);
-  const [marcas, setMarcas] = useState([]); // Estado para armazenar as marcas
+  const [marcas, setMarcas] = useState([]);
   const [categoriaId, setCategoriaId] = useState('');
   const [descricao, setDescricao] = useState('');
   const [nome, setNome] = useState('');
@@ -16,7 +16,7 @@ function EstoqueContent() {
   const [quantidade, setQuantidade] = useState(0);
   const [imagem, setImagem] = useState(null);
   const [idProduto, setIdProduto] = useState(null);
-  const [marcaId, setMarcaId] = useState(''); // Estado para armazenar a marca selecionada
+  const [marcaId, setMarcaId] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [showScrollButton, setShowScrollButton] = useState(false);
   const [showToast, setShowToast] = useState(false);
@@ -86,7 +86,7 @@ function EstoqueContent() {
       case 'quantidade':
         setQuantidade(value);
         break;
-      case 'marcaId': // Adicione o caso para capturar o ID da marca
+      case 'marcaId':
         setMarcaId(value);
         break;
       default:
@@ -108,7 +108,7 @@ function EstoqueContent() {
       await atualizarProdutoComImagem(idImagem, idProdutoResponse);
 
       console.log('Produto cadastrado com sucesso e imagem associada.');
-      setShowModal(false); // Fechar o modal após o cadastro do produto
+      setShowModal(false);
       toast.success('Produto cadastrado com sucesso!');
     } catch (error) {
       console.error('Erro ao cadastrar produto:', error);
@@ -136,7 +136,7 @@ function EstoqueContent() {
       const imageData = await response.json();
       const idImagem = imageData.id;
       console.log('Imagem cadastrada com sucesso. ID:', idImagem);
-      return idImagem; // Retorna o ID da imagem
+      return idImagem;
     } catch (error) {
       console.error('Erro ao cadastrar imagem:', error);
       throw error;
@@ -145,7 +145,7 @@ function EstoqueContent() {
 
   const cadastrarProduto = async (idImagem) => {
     try {
-      const precoNumerico = parseFloat(preco.replace('R$', '').replace('.', '').replace(',', '.')); // Converte para número
+      const precoNumerico = parseFloat(preco.replace('R$', '').replace('.', '').replace(',', '.'));
 
       const produtoData = {
         categoria: { id: categoriaId },
@@ -154,7 +154,7 @@ function EstoqueContent() {
         preco: precoNumerico,
         quantidade,
         idImagem,
-        marca: { id: marcaId } // Adiciona a marca selecionada
+        marca: { id: marcaId }
       };
 
       const response = await fetch('https://backend.suldailhanet.com.br/api/produto', {

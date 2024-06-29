@@ -5,6 +5,7 @@ import GenerateReportButton from './GenerateReportButton';
 import VisualizarModal from './VisualizarModal/VisualizarModal';
 import styles from '../../../Styles/Pages/Estoque/ListaEstoque.module.scss';
 import LupaIcon from '../../../assets/icon_lupa.svg';
+import { ColorRing } from 'react-loader-spinner';
 
 const ListaEstoque = () => {
     const [produtos, setProdutos] = useState([]);
@@ -78,7 +79,19 @@ const ListaEstoque = () => {
     );
 
     if (loading) {
-        return <div>Carregando...</div>;
+        return (
+            <div className={styles.loadingContainer}>
+                <ColorRing
+                    visible={true}
+                    height="80"
+                    width="80"
+                    ariaLabel="color-ring-loading"
+                    wrapperStyle={{}}
+                    wrapperClass="color-ring-wrapper"
+                    colors={['#3445dd', '#076DF2', '#0554F2', '#3445dd', '#0554F2']}
+                />
+            </div>
+        );
     }
 
     if (error) {
@@ -91,7 +104,6 @@ const ListaEstoque = () => {
 
     return (
         <div>
-            
             <div className={styles.Search}>
                 <div className={styles.Search__Content}>
                     <input

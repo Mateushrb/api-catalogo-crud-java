@@ -1,4 +1,3 @@
-// InputPesquisar.js
 import React from 'react';
 import Styles from "../../../../Styles/Header/Input.module.scss"
 
