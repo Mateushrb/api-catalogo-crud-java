@@ -24,7 +24,7 @@ function EstoqueContent() {
   useEffect(() => {
     const fetchCategorias = async () => {
       try {
-        const response = await fetch('http://45.235.53.125:8080/api/categoria');
+        const response = await fetch('https://backend.suldailhanet.com.br/api/categoria');
         if (!response.ok) {
           throw new Error('Erro ao obter categorias: ' + response.statusText);
         }
@@ -41,7 +41,7 @@ function EstoqueContent() {
   useEffect(() => {
     const fetchMarcas = async () => {
       try {
-        const response = await fetch('http://45.235.53.125:8080/api/marca');
+        const response = await fetch('https://backend.suldailhanet.com.br/api/marca');
         if (!response.ok) {
           throw new Error('Erro ao obter marcas: ' + response.statusText);
         }
@@ -124,7 +124,7 @@ function EstoqueContent() {
       const imagemData = new FormData();
       imagemData.append('imagem', imagem);
 
-      const response = await fetch('http://45.235.53.125:8080/api/imagem', {
+      const response = await fetch('https://backend.suldailhanet.com.br/api/imagem', {
         method: 'POST',
         body: imagemData
       });
@@ -157,7 +157,7 @@ function EstoqueContent() {
         marca: { id: marcaId } // Adiciona a marca selecionada
       };
 
-      const response = await fetch('http://45.235.53.125:8080/api/produto', {
+      const response = await fetch('https://backend.suldailhanet.com.br/api/produto', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json; charset=utf-8'
@@ -188,7 +188,7 @@ function EstoqueContent() {
 
   const atualizarProdutoComImagem = async (idImagem, idProdutoResponse) => {
     try {
-      const url = `http://45.235.53.125:8080/api/produto/addImagem?imagem=${idImagem}&produto=${idProdutoResponse}`;
+      const url = `https://backend.suldailhanet.com.br/api/produto/addImagem?imagem=${idImagem}&produto=${idProdutoResponse}`;
 
       const response = await fetch(url, {
         method: 'PATCH'

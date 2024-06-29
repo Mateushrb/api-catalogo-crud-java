@@ -11,7 +11,7 @@ const EditModal = ({ product, onSave, onClose }) => {
     const [isProdutoSelecionado, setIsProdutoSelecionado] = useState(false);
 
     useEffect(() => {
-        fetch('http://45.235.53.125:8080/api/categoria')
+        fetch('https://backend.suldailhanet.com.br/api/categoria')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Erro ao buscar categorias');
@@ -26,7 +26,7 @@ const EditModal = ({ product, onSave, onClose }) => {
                 console.error('Erro ao buscar categorias:', error);
             });
 
-        fetch('http://45.235.53.125:8080/api/marca')
+        fetch('https://backend.suldailhanet.com.br/api/marca')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Erro ao buscar marcas');
@@ -74,7 +74,7 @@ const EditModal = ({ product, onSave, onClose }) => {
             const imagemData = new FormData();
             imagemData.append('imagem', novaImagem);
 
-            const response = await fetch('http://45.235.53.125:8080/api/imagem', {
+            const response = await fetch('https://backend.suldailhanet.com.br/api/imagem', {
                 method: 'POST',
                 body: imagemData,
             });
@@ -111,7 +111,7 @@ const EditModal = ({ product, onSave, onClose }) => {
             }
         }
 
-        fetch('http://45.235.53.125:8080/api/produto', {
+        fetch('https://backend.suldailhanet.com.br/api/produto', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

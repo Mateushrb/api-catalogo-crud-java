@@ -10,7 +10,7 @@ const ModalDetalhesProduto = ({ productId, isOpen, onClose }) => {
         const fetchProduct = async () => {
             try {
                 setLoading(true);
-                const response = await fetch(`http://45.235.53.125:8080/api/produto/${productId}`);
+                const response = await fetch(`https://backend.suldailhanet.com.br/api/produto/${productId}`);
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
@@ -52,7 +52,7 @@ const ModalDetalhesProduto = ({ productId, isOpen, onClose }) => {
                 <div className={styles.Modal__Content}>
                     <button className={styles.Modal__closeButton} onClick={onClose}>x</button>
                     <div className={styles.Modal__Imagem}>
-                        <img src={`http://45.235.53.125:8080/api/imagem/${product.idImagem}`} width="450" height="300" loading="lazy" alt="Imagem do produto" />
+                        <img src={`https://backend.suldailhanet.com.br/api/imagem/${product.idImagem}`} width="450" height="300" loading="lazy" alt="Imagem do produto" />
                     </div>
                     <h3 className={styles.Modal__Heading}>{product.nome}</h3>
                     <p className={styles.Modal__Paragraph}><span className={styles.Modal__Paragraph__span}>Categoria:</span> {product.categoria?.nome}</p>

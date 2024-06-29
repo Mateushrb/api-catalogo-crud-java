@@ -1,5 +1,5 @@
 class API {
-    static URL = "http://45.235.53.125:8080";
+    static URL = "https://backend.suldailhanet.com.br/";
 
     static async fetchData(endpoint, method, data = null) {
         const url = `${this.URL}${endpoint}`;

@@ -51,7 +51,7 @@ function MainContent() {
 
   const enviarQuantidadeAtualizada = async (produto) => {
     try {
-      const response = await fetch(`http://45.235.53.125:8080/api/produto/${produto.id}`, {
+      const response = await fetch(`https://backend.suldailhanet.com.br/api/produto/${produto.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
@@ -79,7 +79,7 @@ function MainContent() {
     if (!produtoAExcluir) return;
 
     try {
-      const response = await fetch(`http://45.235.53.125:8080/api/produto/${produtoAExcluir.id}`, {
+      const response = await fetch(`https://backend.suldailhanet.com.br/api/produto/${produtoAExcluir.id}`, {
         method: 'DELETE',
       });
 
@@ -102,7 +102,7 @@ function MainContent() {
 
   const incrementQuantity = async (id) => {
     try {
-      const response = await fetch(`http://45.235.53.125:8080/api/produto/aumentar/${id}`, {
+      const response = await fetch(`https://backend.suldailhanet.com.br/api/produto/aumentar/${id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json'
@@ -128,7 +128,7 @@ function MainContent() {
 
   const decrementQuantity = async (id) => {
     try {
-      const response = await fetch(`http://45.235.53.125:8080/api/produto/diminuir/${id}`, {
+      const response = await fetch(`https://backend.suldailhanet.com.br/api/produto/diminuir/${id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json'
@@ -216,7 +216,7 @@ function MainContent() {
                 <li key={produto.id} className={Styles.Main__container__ul__li}>
                   {produto.idImagem && (
                     <div className={Styles.Main__container__imagem} onClick={() => setProdutoSelecionado(produto.id)}>
-                      <img className={Styles.Main__container__imagemStyle} src={`http://45.235.53.125:8080/api/imagem/${produto.idImagem}`} loading="lazy" alt="Imagem do produto" />
+                      <img className={Styles.Main__container__imagemStyle} src={`https://backend.suldailhanet.com.br/api/imagem/${produto.idImagem}`} loading="lazy" alt="Imagem do produto" />
                     </div>
                   )}
                   <div className={Styles.Main__container__productInfo}>

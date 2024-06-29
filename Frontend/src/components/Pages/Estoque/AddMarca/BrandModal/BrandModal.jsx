@@ -14,7 +14,7 @@ const BrandModal = ({ onClose }) => {
         e.preventDefault();
         try {
 
-            const checkResponse = await fetch(`http://45.235.53.125:8080/api/marca/nome?nome=${marca}`);
+            const checkResponse = await fetch(`https://backend.suldailhanet.com.br/api/marca/nome?nome=${marca}`);
             if (checkResponse.ok) {
                 const checkData = await checkResponse.json();
                 if (checkData.length > 0) {
@@ -24,7 +24,7 @@ const BrandModal = ({ onClose }) => {
             }
 
 
-            const response = await fetch('http://45.235.53.125:8080/api/marca', {
+            const response = await fetch('https://backend.suldailhanet.com.br/api/marca', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -16,7 +16,7 @@ const ListaEstoque = () => {
     useEffect(() => {
         const fetchProdutos = async () => {
             try {
-                const response = await fetch('http://45.235.53.125:8080/api/produto');
+                const response = await fetch('https://backend.suldailhanet.com.br/api/produto');
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
